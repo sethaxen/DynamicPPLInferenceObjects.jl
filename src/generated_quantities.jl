@@ -11,13 +11,13 @@ function DynamicPPL.generated_quantities(
 end
 
 function DynamicPPL.generated_quantities(
-    mod::DynamicPPL.Model, idata::InferenceObjects.InferenceData
+    mod::DynamicPPL.Model, idata::InferenceObjects.InferenceData; kwargs...
 )
     new_groups = Dict{Symbol,InferenceObjects.Dataset}()
     for k in (:posterior, :prior)
         if haskey(idata, k)
             data = idata[k]
-            new_groups[k] = merge(DynamicPPL.generated_quantities(mod, data), data)
+            new_groups[k] = merge(DynamicPPL.generated_quantities(mod, data; kwargs...), data)
         end
     end
     return merge(idata, InferenceObjects.InferenceData(; new_groups...))
