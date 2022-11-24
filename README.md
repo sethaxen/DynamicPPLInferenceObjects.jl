@@ -37,38 +37,15 @@ julia> y = sin.(x ./ 10) .+ x .+ randn.();
 
 julia> model = mymodel(x, 2) | (; y);
 
-julia> idata = merge(
-           sample(model, Prior(), 1_000; chain_type=InferenceData),
-           sample(model, NUTS(), MCMCThreads(), 1_000, 4; chain_type=InferenceData),
-       )
-InferenceData with groups:
-  > posterior
-  > sample_stats
-  > prior
-  > sample_stats_prior
-  > observed_data
-
-julia> idata = pointwise_loglikelihoods(model, idata)
-InferenceData with groups:
-  > posterior
-  > log_likelihood
-  > sample_stats
-  > prior
-  > sample_stats_prior
-  > observed_data
-
-julia> idata = predict(decondition(model), idata)
-InferenceData with groups:
-  > posterior
-  > posterior_predictive
-  > log_likelihood
-  > sample_stats
-  > prior
-  > prior_predictive
-  > sample_stats_prior
-  > observed_data
-
-julia> idata = generated_quantities(model, idata)
+julia> idata = let
+           idata = merge(
+               sample(model, Prior(), 1_000; chain_type=InferenceData),
+               sample(model, NUTS(), MCMCThreads(), 1_000, 4; chain_type=InferenceData),
+           )
+           idata = pointwise_loglikelihoods(model, idata)
+           idata = predict(decondition(model), idata)
+           idata = generated_quantities(model, idata)
+       end
 InferenceData with groups:
   > posterior
   > posterior_predictive
@@ -81,18 +58,17 @@ InferenceData with groups:
 
 julia> idata.posterior
 Dataset with dimensions: 
-  Dim{:β_dim_1} Sampled{Int64} Base.OneTo(3) ForwardOrdered Regular Points,
+  Dim{:μ_dim_1} Sampled{Int64} Base.OneTo(100) ForwardOrdered Regular Points,
   Dim{:draw} Sampled{Int64} Base.OneTo(1000) ForwardOrdered Regular Points,
-  Dim{:chain} Sampled{Int64} Base.OneTo(4) ForwardOrdered Regular Points
-and 2 layers:
+  Dim{:chain} Sampled{Int64} Base.OneTo(4) ForwardOrdered Regular Points,
+  Dim{:β_dim_1} Sampled{Int64} Base.OneTo(3) ForwardOrdered Regular Points
+and 3 layers:
+  :μ Float64 dims: Dim{:μ_dim_1}, Dim{:draw}, Dim{:chain} (100×1000×4)
   :β Float64 dims: Dim{:β_dim_1}, Dim{:draw}, Dim{:chain} (3×1000×4)
   :σ Float64 dims: Dim{:draw}, Dim{:chain} (1000×4)
 
-with metadata Dict{String, Any} with 4 entries:
-  "sample_stop_time"  => "2022-11-24T20:14:53.53"
-  "created_at"        => "2022-11-24T21:14:53.532"
-  "model_name"        => :mymodel
-  "sample_start_time" => "2022-11-24T20:14:43.911"
+with metadata Dict{String, Any} with 1 entry:
+  "created_at" => "2022-11-24T21:35:10.235"
 
 julia> idata.posterior_predictive
 Dataset with dimensions: 
@@ -103,5 +79,5 @@ and 1 layer:
   :y Float64 dims: Dim{:y_dim_1}, Dim{:draw}, Dim{:chain} (100×1000×4)
 
 with metadata Dict{String, Any} with 1 entry:
-  "created_at" => "2022-11-24T21:15:25.311"
+  "created_at" => "2022-11-24T21:35:07.766"
 ```
