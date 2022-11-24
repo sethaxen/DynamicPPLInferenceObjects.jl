@@ -1,0 +1,13 @@
+name = "DynamicPPLInferenceObjects"
+uuid = "2827beac-1889-4601-a4c7-7cc5e02c531f"
+authors = ["Seth Axen <seth@sethaxen.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

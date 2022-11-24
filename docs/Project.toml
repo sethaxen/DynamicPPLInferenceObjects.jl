@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DynamicPPLInferenceObjects = "2827beac-1889-4601-a4c7-7cc5e02c531f"
