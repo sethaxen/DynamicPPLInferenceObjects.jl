@@ -35,6 +35,8 @@ julia> x = 1:100;
 
 julia> y = sin.(x ./ 10) .+ x .+ randn.();
 
+julia> model = mymodel(x, 2) | (; y);
+
 julia> idata = merge(
            sample(model, Prior(), 1_000; chain_type=InferenceData),
            sample(model, NUTS(), MCMCThreads(), 1_000, 4; chain_type=InferenceData),
