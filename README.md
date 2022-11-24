@@ -8,6 +8,7 @@
 [![ColPrac: Contributor's Guide on Collaborative Practices for Community Packages](https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet)](https://github.com/SciML/ColPrac)
 
 Experimental support for storing MCMC draws generated using AbstractMCMC and DynamicPPL in the `InferenceObjects.InferenceData`.
+This allows `InferenceData` to be a storage container for MCMC draws generated with Turing.
 
 # Example
 
