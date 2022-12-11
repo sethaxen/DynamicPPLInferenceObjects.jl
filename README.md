@@ -63,26 +63,26 @@ InferenceData with groups:
 
 julia> idata.posterior
 Dataset with dimensions: 
-  Dim{:school} Categorical{String} String[Choate, Deerfield, …, St. Paul's, Mt. Hermon] Unordered,
-  Dim{:draw} Sampled{Int64} Base.OneTo(1000) ForwardOrdered Regular Points,
-  Dim{:chain} Sampled{Int64} Base.OneTo(4) ForwardOrdered Regular Points
+  Dim{:draw},
+  Dim{:chain},
+  Dim{:school} Categorical{String} String[Choate, Deerfield, …, St. Paul's, Mt. Hermon] Unordered
 and 4 layers:
-  :θ       Float64 dims: Dim{:school}, Dim{:draw}, Dim{:chain} (8×1000×4)
+  :θ       Float64 dims: Dim{:draw}, Dim{:chain}, Dim{:school} (1000×4×8)
   :μ       Float64 dims: Dim{:draw}, Dim{:chain} (1000×4)
   :τ       Float64 dims: Dim{:draw}, Dim{:chain} (1000×4)
-  :θ_tilde Float64 dims: Dim{:school}, Dim{:draw}, Dim{:chain} (8×1000×4)
+  :θ_tilde Float64 dims: Dim{:draw}, Dim{:chain}, Dim{:school} (1000×4×8)
 
 with metadata Dict{String, Any} with 1 entry:
-  "created_at" => "2022-11-24T22:33:05.228"
+  "created_at" => "2022-12-11T22:45:11.086"
 
 julia> idata.posterior_predictive
 Dataset with dimensions: 
-  Dim{:school} Categorical{String} String[Choate, Deerfield, …, St. Paul's, Mt. Hermon] Unordered,
-  Dim{:draw} Sampled{Int64} Base.OneTo(1000) ForwardOrdered Regular Points,
-  Dim{:chain} Sampled{Int64} Base.OneTo(4) ForwardOrdered Regular Points
+  Dim{:draw},
+  Dim{:chain},
+  Dim{:school} Categorical{String} String[Choate, Deerfield, …, St. Paul's, Mt. Hermon] Unordered
 and 1 layer:
-  :y Float64 dims: Dim{:school}, Dim{:draw}, Dim{:chain} (8×1000×4)
+  :y Float64 dims: Dim{:draw}, Dim{:chain}, Dim{:school} (1000×4×8)
 
 with metadata Dict{String, Any} with 1 entry:
-  "created_at" => "2022-11-24T22:33:04.726"
+  "created_at" => "2022-12-11T22:45:10.644"
 ```
