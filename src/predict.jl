@@ -16,7 +16,7 @@ function StatsBase.predict(
     end
     coords = merge(coords, dims2coords(Dimensions.dims(data, (:draw, :chain))))
     predictions = InferenceObjects.convert_to_dataset(
-        values; group=:posterior_predictive, coords=coords, kwargs...
+        collect(eachcol(values)); group=:posterior_predictive, coords=coords, kwargs...
     )
     pred_keys = filter(∉(keys(data)), keys(predictions))
     isempty(pred_keys) && return nothing

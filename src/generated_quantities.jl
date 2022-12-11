@@ -7,7 +7,9 @@ function DynamicPPL.generated_quantities(
         DynamicPPL.generated_quantities(mod, data[dims...])
     end
     coords = merge(coords, dims2coords(sample_dims))
-    return InferenceObjects.convert_to_dataset(values; coords=coords, kwargs...)
+    return InferenceObjects.convert_to_dataset(
+        collect(eachcol(values)); coords=coords, kwargs...
+    )
 end
 
 function DynamicPPL.generated_quantities(
@@ -17,7 +19,9 @@ function DynamicPPL.generated_quantities(
     for k in (:posterior, :prior)
         if haskey(idata, k)
             data = idata[k]
-            new_groups[k] = merge(DynamicPPL.generated_quantities(mod, data; kwargs...), data)
+            new_groups[k] = merge(
+                DynamicPPL.generated_quantities(mod, data; kwargs...), data
+            )
         end
     end
     return merge(idata, InferenceObjects.InferenceData(; new_groups...))

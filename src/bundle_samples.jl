@@ -76,7 +76,6 @@ function AbstractMCMC.chainsstack(c::AbstractVector{<:InferenceObjects.Dataset})
     nchains = length(c)
     nchains == 1 && return c[1]
     # TODO: gather our metadata into vectors instead of replacing
-    group = cat(c...; dims=:chain)
-    # give each chain a different index
-    return LookupArrays.set(group, :chain => Base.OneTo(nchains))
+    group = cat(c...; dims=Dimensions.Dim{:chain})
+    return group
 end
