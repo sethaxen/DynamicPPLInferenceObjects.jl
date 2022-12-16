@@ -16,7 +16,7 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 [compat]
 AbstractMCMC = "4"
 AbstractPPL = "0.5, 0.6"
-DimensionalData = "0.23"
+DimensionalData = "0.23, 0.24"
 DynamicPPL = "0.21"
 InferenceObjects = "0.3"
 StatsBase = "0.33"
